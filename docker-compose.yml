@@ -1,0 +1,16 @@
+version: '3.7'
+
+services:
+  restinterview:
+    image: ${DOCKER_REGISTRY-}restinterview
+    build:
+      dockerfile: RestInterview/Dockerfile
+    depends_on:
+      - sql
+    ports:
+      - "5000:80"
+  sql:
+    image: db
+    build: ./Db
+    ports: # not actually needed, because the two services are on the same network
+      - "1433:1433"
